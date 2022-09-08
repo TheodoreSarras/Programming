@@ -5,7 +5,28 @@ struct Node {
   int value;
   Node* next;
 };
-
+void removemiddle(Node* head){
+  Node* run = head;
+  int counter=0;
+  while(run!= NULL){
+    counter++;
+    run = run->next;
+  }
+  run = head;
+  for(int i=0;i<counter/2-1;i++){
+    run = run->next;
+  }
+  Node* mem= run->next;
+  run->next = mem->next;
+  mem->next = NULL;
+  while (head != NULL) {
+    cout << head->value;
+    head = head->next;
+  }
+  delete(run);
+  delete(mem);
+  return;
+}
 int main() {
   Node* head;
   Node* one=new Node();
@@ -27,5 +48,12 @@ int main() {
   four->next = five;
   five->next = NULL;
 
+  removemiddle(head);
+
+  delete (one);
+  delete (two);
+  delete (three);
+  delete (four);
+  delete (five);
   return 0;
 }
